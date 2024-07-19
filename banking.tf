@@ -84,7 +84,6 @@ resource "aws_security_group" "mysg9" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
   egress {
     from_port        = 0
     to_port          = 0
@@ -92,7 +91,6 @@ resource "aws_security_group" "mysg9" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
   tags = {
     Name = "mysg9"
   }
@@ -101,13 +99,12 @@ resource "aws_security_group" "mysg9" {
 # Create Instance
 
 resource "aws_instance" "instance9" {
-  ami           = "ami-0f58b397bc5c1f2e8"
+  ami           = "ami-003932de22c285676"
   instance_type = "t2.micro"
   associate_public_ip_address = true
   subnet_id = aws_subnet.mysubnet9.id
   vpc_security_group_ids = [aws_security_group.mysg9.id]
   key_name = "awskey-124"
-
   tags = {
     Name = "Dummy_Server0"
   }
