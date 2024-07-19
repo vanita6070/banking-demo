@@ -1,6 +1,6 @@
 #Initialize Terraform
 terraform {
-  required_provider {
+  required_providers {
     aws = {
       source = "hashicorp/aws"
       version = ">=4.0"
@@ -58,8 +58,8 @@ route_table_id = aws_route_table.proj-rt.id
 }
 
 #creating security group
-resource "aws_security_group" "proj-5g" { 
-name = "proj-5g" 
+resource "aws_security_group" "proj-sg" { 
+name = "proj-sg" 
 description = "Enable web traffic for the project" 
 vpc_id = aws_vpc.proj-vpc.id 
 ingress { 
@@ -110,7 +110,7 @@ Name = "proj-sg1"
 } 
 
 #creating a new network interface
-resource "aws_network_interface" Pproj-ni" {
+resource "aws_network_interface" proj-ni" {
 subnet_id - aws_subnet.proj-subnet.id
 private_ips = ["10.0.1.10"]
 security_groups = [aws_security_group.proj-sg.id]
