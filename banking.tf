@@ -48,18 +48,29 @@ resource "aws_route_table_association" "myrta9" {
 subnet_id = aws_subnet.mysubnet9.id 
 route_table_id = aws_route_table.myrt9.id 
 
-# Security Groups 
-resource "aws_security_group" "mysg9" { 
-name = "mysg9" 
-description = "Allow inbound traffic" 
-vpc_id = aws_vpc.myvpc9.id 
-ingress { 
-description = "HTTP" 
-from_port = 80 
-to_port = 80 
-protocol = "tcp" 
-cidr_blocks = ["0.0.0.0/0"] 
-} 
+module "vote_service_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
+  name        = "user-service"
+  description = "Security group for user-service with custom ports open within VPC, and PostgreSQL publicly open"
+  vpc_id      = "vpc-12345678"
+
+  ingress_cidr_blocks      = ["10.10.0.0/16"]
+  ingress_rules            = ["https-443-tcp"]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 8080
+      to_port     = 8090
+      protocol    = "tcp"
+      description = "User-service ports"
+      cidr_blocks = "10.10.0.0/16"
+    },
+    {
+      rule        = "postgresql-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+}
 
 ingress { 
 description = "SSH" 
@@ -82,7 +93,7 @@ Name = "mysg9"
 }
 
 # Create Instance 
-resource "aws_instance" "sainstance9" { 
+resource "aws_instance" "SA-TF-TestInstance1" { 
 ami = "ami-0862be96e41dcbf74" 
 instance_type = "t2.micro" 
 associate_public_ip_address = true 
