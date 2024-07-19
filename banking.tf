@@ -1,11 +1,17 @@
 #Initialze Terraform
 terraform {
+required_providers {
+aws - {
+source = "hashicorp/aws"
+version - "-->5.7"
+}
+}
+}
+
+#configure the AWS provider
 provider "aws" { 
 region = "us-east-2" 
-access_key = "AKIA6GBMFS736D7WFNO6"
-secret_key = "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"
 } 
-}
 
 # Create VPC 
 resource "aws_vpc" "myvpc9" { 
