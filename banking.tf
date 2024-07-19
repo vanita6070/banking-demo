@@ -1,9 +1,7 @@
 #Initialize Terraform
 terraform {
 source = "hashicorp/aws"
-version - "-->5.7"
-}
-}
+version = "4.0"
 }
 
 #configure the AWS provider
