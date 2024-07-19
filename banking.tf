@@ -1,10 +1,4 @@
 #Initialize Terraform
-terraform {
-source = "hashicorp/aws"
-version = "4.0"
-}
-
-#configure the AWS provider
 provider "aws" { 
 region = "us-east-2" 
 } 
