@@ -143,5 +143,4 @@ resource "aws_instance" "Prod-Server" {
  }
 }
 
-
  
