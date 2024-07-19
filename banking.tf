@@ -1,8 +1,11 @@
+#Initialze Terraform
+terraform {
 provider "aws" { 
 region = "us-east-2" 
 access_key = "AKIA6GBMFS736D7WFNO6"
 secret_key = "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"
 } 
+}
 
 # Create VPC 
 resource "aws_vpc" "myvpc9" { 
@@ -95,7 +98,7 @@ Name = "SA-TF-TestInstance1"
 } 
 } 
 }
-}
+
 
 
  
